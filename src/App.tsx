@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import NavBar from './Nav';
+import WhitePaperPage from './WhitePaperPage';
 
 import "./index.css";
 
-const App = () => <NavBar />; 
+const App = () => <WhitePaperPage/>; 
 
 ReactDOM.render(<App />, document.getElementById("app"));

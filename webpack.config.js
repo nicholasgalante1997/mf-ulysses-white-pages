@@ -44,10 +44,11 @@ module.exports = {
       name: "nav",
       filename: "remoteEntry.js",
       remotes: {
-        'appData': 'app_data@http://localhost:3002/remoteEntry.js'
+        'appData': 'app_data@http://localhost:3002/remoteEntry.js',
+        'host': 'mf_sidecar@http://localhost:4004/remoteEntry.js'
       },
       exposes: {
-        './Nav': './src/Nav'
+        './WhitePaperPage': './src/WhitePaperPage'
       },
       shared: {
         ...deps,
