@@ -41,7 +41,7 @@ module.exports = {
 
   plugins: [
     new ModuleFederationPlugin({
-      name: "nav",
+      name: "whitePage",
       filename: "remoteEntry.js",
       remotes: {
         'appData': 'app_data@http://localhost:3002/remoteEntry.js',
