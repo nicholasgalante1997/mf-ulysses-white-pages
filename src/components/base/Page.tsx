@@ -8,6 +8,10 @@ const Page = styled.main`
   font-family: 'Lora', serif;
   font-weight: 300;
   color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `
 
 export default Page;

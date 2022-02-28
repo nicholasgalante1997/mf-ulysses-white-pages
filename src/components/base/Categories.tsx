@@ -8,10 +8,9 @@ const Container = styled.div`
     align-items: center;
     width: 100%;
     padding-left: 24px;
-    padding-right: 24px;
+    margin-left: 16px;
     padding-top: 0px;
     padding-bottom: 0px;
-    margin: 0px;
 `;
 
 const Category = styled.h2`
@@ -41,7 +40,7 @@ const Categories: React.FC<CategoriesProps> = ({ categories }) => (
        <CategoryNomer>
            Categories:
         </CategoryNomer> 
-        {categories.map(c => <Category>{c}</Category>)}
+        {categories.map(c => <Category>{c} /</Category>)}
     </Container>
 );
 

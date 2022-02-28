@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const CenterBox = styled.div`
-    width: 100%;
+    width: 70%;
     padding-left: 24px;
     padding-right: 24px;
     padding-top: 12px;
@@ -11,7 +11,7 @@ const CenterBox = styled.div`
     margin-bottom: 1rem;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-content: center;
     text-align: center;
 `
 

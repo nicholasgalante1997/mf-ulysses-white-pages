@@ -7,15 +7,32 @@ import { WhitePageHeader } from './components/WhitePageHeader';
 import { Subheading } from './components/WhitePageSubheading'
 import { Page, Heading, Categories } from './components/base';
 
+const SectionTitle = styled(Heading)`
+  font-size: 2rem;
+  font-weight: 600;
+  font-style: italic;
+  text-decoration: underline;
+  align-self: flex-start;
+  padding-left: 24px;
+  padding-right: 24px;
+`
+
+const Paragraph = styled.p<{children: any}>`
+  padding-left: 24px;
+  padding-right: 24px;
+  line-height: 1.25;
+  font-weight: 300;
+`
 
 interface WhitePaperPageProps {
   articleKey?: string;
 }
+
 const WhitePaperPage: React.FC<WhitePaperPageProps> = ({ articleKey }) =>  {
   const { scriptFailed, error, isLoading, data } = useFederatedModule(
     'http://localhost:4002/remoteEntry.js',
     'app_data',
-    './OriginObject'
+    articleKey
   );
   const [name, setName] = useState<string>(null);
   const [author, setAuthor] = useState<string>(null);
@@ -51,10 +68,6 @@ const WhitePaperPage: React.FC<WhitePaperPageProps> = ({ articleKey }) =>  {
       );
   }
 
-  if (data) {
-    console.log(data.default.meta.categories);
-  }
-
     return (
       <Page>
         <WhitePageHeader 
@@ -68,7 +81,8 @@ const WhitePaperPage: React.FC<WhitePaperPageProps> = ({ articleKey }) =>  {
         <Categories categories={categories ?? []} />
         <ReactMarkdown
           components={{
-            h1: Heading,
+            h1: SectionTitle,
+            p: Paragraph
           }}
         >
           {data && data.default.markdown} 
