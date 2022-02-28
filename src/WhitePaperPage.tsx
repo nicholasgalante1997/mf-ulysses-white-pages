@@ -1,35 +1,41 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ReactMarkdown from 'react-markdown';
 import { useFederatedModule } from 'react-federated-module-loader';
+import { SpinnerInfinity } from 'spinners-react';
+import { WhitePageHeader } from './components/WhitePageHeader';
+import { Subheading } from './components/WhitePageSubheading'
+import { Page, Heading, Categories } from './components/base';
 
-const Page = styled.main`
-  padding: 16px;
-  margin-left: 10vw;
-  margin-right: 10vw;
-`
 
-const Heading = styled.h2<{children: any}>`
-  font-size: xx-large;
-  color: deeppink;
-`
 interface WhitePaperPageProps {
   articleKey?: string;
 }
 const WhitePaperPage: React.FC<WhitePaperPageProps> = ({ articleKey }) =>  {
-  const { scriptReady, scriptFailed, error, isLoading, data } = useFederatedModule(
+  const { scriptFailed, error, isLoading, data } = useFederatedModule(
     'http://localhost:4002/remoteEntry.js',
     'app_data',
     './OriginObject'
-)
+  );
+  const [name, setName] = useState<string>(null);
+  const [author, setAuthor] = useState<string>(null);
+  const [shortDesc, setShortDesc] = useState<string>(null);
+  const [imageModule, setImageModule] = useState<string>(null);
+  const [categories, setCategories] = useState<string[]>(null);
 
-  if (scriptReady) {
-      console.log('scriptReady: true')
-  }
+  useEffect(() => {
+    if (data) {
+      setName(data.default.meta.name);
+      setAuthor(data.default.meta.author);
+      setCategories(data.default.meta.categories);
+      setShortDesc(data.default.meta.shortDesc);
+      setImageModule(data.default.meta.imageModule);
+    }
+  }, [data])
 
   if (scriptFailed) {
       console.log('scriptFailed: true')
-      return <p>loading</p>
+      return <p>script failed to append to the dom</p>
   }
 
   if (error) {
@@ -38,25 +44,37 @@ const WhitePaperPage: React.FC<WhitePaperPageProps> = ({ articleKey }) =>  {
   }
 
   if (isLoading) {
-      console.log('useRemoteObject is loading')
-      return <p>loading...</p>
+      return (
+      <Page>
+        <SpinnerInfinity enabled={isLoading} color={'black'} />
+      </Page>
+      );
   }
 
   if (data) {
-      console.log('target' + ' / ' + JSON.stringify(data))
+    console.log(data.default.meta.categories);
   }
-  return (
-    <Page>
-      <ReactMarkdown
-        components={{
-          h1: Heading,
-        }}
-      >
-        {data && data.default.markdown} 
-      </ReactMarkdown>
-    </Page>
-  );
-  // return (data && data.html);
+
+    return (
+      <Page>
+        <WhitePageHeader 
+          name={name} 
+          imageModule={imageModule}
+        />
+        <Subheading 
+          author={author}
+          shortDesc={shortDesc}
+        />
+        <Categories categories={categories ?? []} />
+        <ReactMarkdown
+          components={{
+            h1: Heading,
+          }}
+        >
+          {data && data.default.markdown} 
+        </ReactMarkdown>
+      </Page>
+    );
 }
 
 export default WhitePaperPage;
