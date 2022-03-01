@@ -11,6 +11,8 @@ const FixedHeading = styled(Heading)`
     font-family: 'Lora', serif;
     opacity: 1.0;
     z-index: 1;
+    color: #800000;
+    text-decoration: underline;
 `
 
 export default FixedHeading;
