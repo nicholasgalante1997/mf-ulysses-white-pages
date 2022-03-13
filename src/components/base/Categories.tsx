@@ -13,21 +13,27 @@ const Container = styled.div`
     padding-bottom: 0px;
 `;
 
-const Category = styled.h2`
+const Category = styled.span`
     font-family: 'Lora', serif;
-    font-weight: 800;
-    color: darkred;
-    text-transform: uppercase;
-    font-size: 0.75rem;
-    font-style: bold;
-    padding-left: 2rem;
+    font-weight: 200;
+    font-size: 1rem;
+    font-style: italic;
+
+    color: #800000;
+
+    display: inline-flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    border-radius: 4px;
+    padding: 16px;
+    margin-left: 0.5rem;
 `;
 
 const CategoryNomer = styled.h1`
     font-family: 'Lora', serif;
-    font-weight: 600;
+    font-weight: 200;
     color: black;
-    font-size: 2rem;
+    font-size: 1rem;
     font-style: italic;
 `
 
@@ -37,10 +43,10 @@ interface CategoriesProps {
 
 const Categories: React.FC<CategoriesProps> = ({ categories }) => (
     <Container>
-       <CategoryNomer>
-           Categories:
-        </CategoryNomer> 
-        {categories.map(c => <Category>{c} /</Category>)}
+        <CategoryNomer>
+            tags:
+        </CategoryNomer>
+        {categories.map(c => <Category>{c}</Category>)}
     </Container>
 );
 

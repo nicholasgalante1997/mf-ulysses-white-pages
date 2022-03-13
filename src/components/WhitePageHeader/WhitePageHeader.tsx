@@ -44,7 +44,11 @@ const WhitePageHeader: React.FC<WhitePageHeaderProps> = ({
     return (
         <HeaderBox>
             <HeaderImage src={imgUrl} />
-            <FixedHeading>{titlecaseString(name)}</FixedHeading>
+            <FixedHeading 
+                fontSize={
+                    name.length > 10 ? "3.85rem" : "6rem"
+                }
+            >{name}</FixedHeading>
         </HeaderBox>
     );
 }

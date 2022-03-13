@@ -4,9 +4,9 @@ import Heading from './Heading';
 
 const FixedHeading = styled(Heading)`
     position: absolute;
-    bottom: -3rem;
+    bottom: -2.25rem;
     left: 24px;
-    font-size: 6rem;
+    font-size: ${(props: { fontSize: string }) => props.fontSize};
     font-weight: 500;
     font-family: 'Lora', serif;
     opacity: 1.0;
@@ -14,5 +14,6 @@ const FixedHeading = styled(Heading)`
     color: #800000;
     text-decoration: underline;
 `
+
 
 export default FixedHeading;
